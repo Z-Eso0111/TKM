@@ -3,16 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eğlenceli Sürpriz!</title>
+    <title>Taş Kağıt Makas Oyunu</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        .result {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hoş Geldiniz!</h1>
-    <p>Bu sayfa size eğlenceli bir sürpriz sunacak. Lütfen aşağıdaki düğmeye tıklayın:</p>
-    <button onclick="eylem()">Sürpriz!</button>
+    <h1>Taş Kağıt Makas Oyunu</h1>
+    <p>Lütfen bir seçenek seçin:</p>
+    <button onclick="oyun('taş')">Taş</button>
+    <button onclick="oyun('kağıt')">Kağıt</button>
+    <button onclick="oyun('makas')">Makas</button>
+    <p class="result" id="sonuc"></p>
 
     <script>
-        function eylem() {
-            alert('Sürpriz! 🎉 Bu bir sürpriz mesajdır. Umarım hoşunuza gitmiştir!');
+        function oyun(secim) {
+            const secenekler = ["taş", "kağıt", "makas"];
+            const bilgisayarSecimi = secenekler[Math.floor(Math.random() * 3)];
+
+            let sonuc = "";
+
+            if (secim === bilgisayarSecimi) {
+                sonuc = "Berabere!";
+            } else if ((secim === "taş" && bilgisayarSecimi === "makas") ||
+                       (secim === "kağıt" && bilgisayarSecimi === "taş") ||
+                       (secim === "makas" && bilgisayarSecimi === "kağıt")) {
+                sonuc = "Siz kazandınız!";
+            } else {
+                sonuc = "Bilgisayar kazandı!";
+            }
+
+            document.getElementById("sonuc").textContent = `Siz: ${secim} vs. Bilgisayar: ${bilgisayarSecimi}. Sonuç: ${sonuc}`;
         }
     </script>
 </body>
